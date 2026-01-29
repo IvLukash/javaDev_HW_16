@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Note</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+</head>
+<body>
+<div th:if="${error}" class="alert alert-danger ms-3 mt-3 me-3">
+    <p th:text="${error}"></p>
+</div>
+<div th:if="${note != null}" class="card ms-3 mt-5 me-3">
+    <div class="card-header fs-4">
+        Note details
+    </div>
+    <div class="card-body">
+        <p class="card-text">Note ID: <strong th:text="${note.id}"></strong></p>
+        <p class="card-text">Note title: <strong th:text="${note.title}"></strong></p>
+        <p class="card-text">Note content: <strong th:text="${note.content}"></strong></p>
+    </div>
+    <div class="card-footer">
+        <a th:href="@{/note/edit(id=${note.id})}" style="display: inline-block; margin-right: 5px;">
+            <button type="submit" class="btn btn-primary">Edit note</button>
+        </a>
+        <form th:method="POST" th:action="@{/note/delete(id=${note.id})}"
+              style="display: inline-block;">
+            <button type="submit" class="btn btn-primary">Delete note</button>
+        </form>
+    </div>
+</div>
+<hr>
+<a class="text-primary ms-3 mb-3 fs-5" href="/note/list">Return to the main page</a>
+</body>
+</html>

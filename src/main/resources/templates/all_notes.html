@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NoteBook</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+</head>
+<body>
+<h3 class="ms-3 mt-5 text-start">Here is a list of all notes!</h3>
+<br>
+<div class="list-group ms-3 mb-2 w-75" th:each="note : ${notes}">
+    <a class="list-group-item list-group-item-action list-group-item-primary"
+       th:href="@{/note/get(id=${note.id})}" th:text="${note.title}"></a>
+</div>
+<br><hr>
+<a class="text-primary ms-3 mb-3 fs-4" href="/note/new">Add new note</a>
+</body>
+</html>
