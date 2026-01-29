@@ -16,28 +16,39 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/note")
 public class NoteController {
+    private static final String USER_ID = "user_id";
     private final NoteService service;
     private final UserCookie userCookie;
+
+    @GetMapping
+    public String getStartPage(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        userCookie.getOrCreateUserId(request, response);
+        return "index";
+    }
 
     @GetMapping("/list")
     public String getAllNotes(
             Model model,
-            HttpServletRequest request,
-            HttpServletResponse response
+            @CookieValue(value = USER_ID, required = false) String userIdParam
     ) {
-        UUID userId = userCookie.getOrCreateUserId(request, response);
+        if (userIdParam == null) {
+            return "redirect:/note";
+        }
+        UUID userId = UUID.fromString(userIdParam);
         model.addAttribute("notes", service.listAllByUserId(userId));
         return "all_notes";
     }
 
-    @GetMapping("/get")
+    @GetMapping("/get/{id}")
     public String getNoteById(
             Model model,
-            @RequestParam("id") String idParam,
-            HttpServletRequest request,
-            HttpServletResponse response
+            @PathVariable("id") String idParam,
+            @CookieValue(value = USER_ID, required = false) String userIdParam
     ) {
-        UUID userId = userCookie.getOrCreateUserId(request, response);
+        UUID userId = UUID.fromString(userIdParam);
         Long id = Long.parseLong(idParam);
         model.addAttribute("note", service.getById(id, userId));
         return "get_note";
@@ -52,46 +63,42 @@ public class NoteController {
     @PostMapping("/new")
     public String createNote(
             @ModelAttribute("note") NoteDto noteDto,
-            HttpServletRequest request,
-            HttpServletResponse response
+            @CookieValue(value = USER_ID, required = false) String userIdParam
     ) {
-        UUID userId = userCookie.getOrCreateUserId(request, response);
+        UUID userId = UUID.fromString(userIdParam);
         service.add(noteDto, userId);
         return "redirect:/note/list";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/edit/{id}")
     public String getEditForm(
             Model model,
-            @RequestParam("id") String idParam,
-            HttpServletRequest request,
-            HttpServletResponse response
+            @PathVariable("id") String idParam,
+            @CookieValue(value = USER_ID, required = false) String userIdParam
     ) {
-        UUID userId = userCookie.getOrCreateUserId(request, response);
+        UUID userId = UUID.fromString(userIdParam);
         Long id = Long.parseLong(idParam);
         model.addAttribute("note", service.getById(id, userId));
         return "edit_form";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{id}")
     public String updateNote(
-            @RequestParam("id") Long id,
-            HttpServletRequest request,
-            HttpServletResponse response,
+            @PathVariable("id") Long id,
+            @CookieValue(value = USER_ID, required = false) String userIdParam,
             @ModelAttribute("note") NoteDto noteDto
     ) {
-        UUID userId = userCookie.getOrCreateUserId(request, response);
+        UUID userId = UUID.fromString(userIdParam);
         service.update(id, userId, noteDto);
         return "redirect:/note/list";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/delete/{id}")
     public String deleteNote(
-            @RequestParam("id") Long id,
-            HttpServletRequest request,
-            HttpServletResponse response
+            @PathVariable("id") Long id,
+            @CookieValue(value = USER_ID, required = false) String userIdParam
     ) {
-        UUID userId = userCookie.getOrCreateUserId(request, response);
+        UUID userId = UUID.fromString(userIdParam);
         service.deleteById(id, userId);
         return "redirect:/note/list";
     }

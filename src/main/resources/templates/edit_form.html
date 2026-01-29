@@ -11,7 +11,7 @@
 </head>
 <body>
 <h3 class="ms-3 mt-5 text-start">Here you can edit your note!</h3>
-<form th:method="POST" th:action="@{/note/edit(id=${note.id})}" th:object="${note}">
+<form th:method="POST" th:action="@{/note/edit/{id}(id=${note.id})}" th:object="${note}">
     <input type="hidden" th:field="*{id}"/>
     <div class="mb-3 ms-3 mt-5 me-3">
         <label for="title" class="form-label">Note title</label>

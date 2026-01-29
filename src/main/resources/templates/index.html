@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,13 +10,11 @@
           crossorigin="anonymous">
 </head>
 <body>
-<h3 class="ms-3 mt-5 text-start">Here is a list of all notes!</h3>
+<h2 class="ms-3 mt-5 text-start">Hello! Welcome to NoteBook application!</h2>
 <br>
-<div class="list-group ms-3 mb-2 w-75" th:each="note : ${notes}">
-    <a class="list-group-item list-group-item-action list-group-item-primary"
-       th:href="@{/note/get/{id}(id=${note.id})}" th:text="${note.title}"></a>
-</div>
-<br><hr>
-<a class="text-primary ms-3 mb-3 fs-4" href="/note/new">Add new note</a>
+<h3 class="ms-3 mt-5 text-start">Use it and be enjoyed!</h3>
+<br>
+<hr>
+<a class="text-primary ms-3 mb-3 fs-4" href="/note/list">Go to the main page</a>
 </body>
 </html>

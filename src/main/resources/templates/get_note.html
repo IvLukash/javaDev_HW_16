@@ -23,10 +23,10 @@
         <p class="card-text">Note content: <strong th:text="${note.content}"></strong></p>
     </div>
     <div class="card-footer">
-        <a th:href="@{/note/edit(id=${note.id})}" style="display: inline-block; margin-right: 5px;">
+        <a th:href="@{/note/edit/{id}(id=${note.id})}" style="display: inline-block; margin-right: 5px;">
             <button type="submit" class="btn btn-primary">Edit note</button>
         </a>
-        <form th:method="POST" th:action="@{/note/delete(id=${note.id})}"
+        <form th:method="POST" th:action="@{/note/delete/{id}(id=${note.id})}"
               style="display: inline-block;">
             <button type="submit" class="btn btn-primary">Delete note</button>
         </form>
