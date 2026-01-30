@@ -1,4 +1,4 @@
-package goit.edu.model;
+package goit.edu.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

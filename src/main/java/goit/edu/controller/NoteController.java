@@ -1,6 +1,6 @@
 package goit.edu.controller;
 
-import goit.edu.model.NoteDto;
+import goit.edu.model.dto.NoteDto;
 import goit.edu.service.NoteService;
 import goit.edu.webheloer.UserCookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class NoteController {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
-        userCookie.getOrCreateUserId(request, response);
+        userCookie.createUserId(request, response);
         return "index";
     }
 

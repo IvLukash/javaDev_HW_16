@@ -1,7 +1,7 @@
 package goit.edu.service;
 
-import goit.edu.model.Note;
-import goit.edu.model.NoteDto;
+import goit.edu.model.entity.Note;
+import goit.edu.model.dto.NoteDto;
 import goit.edu.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
