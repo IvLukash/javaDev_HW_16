@@ -2,9 +2,6 @@ package goit.edu.controller;
 
 import goit.edu.model.dto.NoteDto;
 import goit.edu.service.NoteService;
-import goit.edu.webheloer.UserCookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +15,9 @@ import java.util.UUID;
 public class NoteController {
     private static final String USER_ID = "user_id";
     private final NoteService service;
-    private final UserCookie userCookie;
 
     @GetMapping
-    public String getStartPage(
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) {
-        userCookie.createUserId(request, response);
+    public String getStartPage() {
         return "index";
     }
 
