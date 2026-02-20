@@ -18,7 +18,7 @@ public class NoteController {
 
     @GetMapping
     public String getStartPage() {
-        return "index";
+        return "main_page";
     }
 
     @GetMapping("/list")

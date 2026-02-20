@@ -1,4 +1,4 @@
-package goit.edu.webheloer;
+package goit.edu.webhelper;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

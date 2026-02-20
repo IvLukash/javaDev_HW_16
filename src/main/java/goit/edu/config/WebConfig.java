@@ -1,6 +1,6 @@
 package goit.edu.config;
 
-import goit.edu.webheloer.UserCookieInterceptor;
+import goit.edu.webhelper.UserCookieInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
